@@ -1,0 +1,104 @@
+﻿DOCUMENTAÇÃO API PERSONAL LIBRARY
+
+
+Adrian Kauã Xaviere Ana Carolina Pereira Martins
+
+
+
+
+
+
+Com base no seu código Flask, os seguintes endpoints estão disponíveis:
+
+
+1. /add_book (POST)
+* Propósito: Adiciona um novo livro à sua biblioteca pessoal.
+* O que enviar no corpo da requisição (em JSON):
+JSON
+{
+   "title": "O Nome do Vento",
+   "genre": "Fantasia"
+}
+* title: O título do livro (string, obrigatório).
+* genre: O gênero do livro (string, obrigatório).
+
+
+* Resposta de sucesso (HTTP 201 Created):
+JSON
+{
+   "message": "Book added successfully"
+}
+
+
+* Resposta de erro (HTTP 400 Bad Request):
+JSON
+{
+   "error": "Title and genre are required"
+}
+
+
+(Ocorre se title ou genre não forem fornecidos.)
+
+
+2. /my_books (GET)
+* Propósito: Lista todos os livros da sua biblioteca e fornece 3 indicações aleatórias (ou menos, se houver menos de 3 livros).
+* O que enviar: Nada no corpo da requisição. É uma requisição GET simples.
+* Resposta de sucesso (HTTP 200 OK):
+JSON
+{
+   "my_books": [
+       {"title": "O Nome do Vento", "genre": "Fantasia"},
+       {"title": "A Guerra dos Tronos", "genre": "Fantasia"},
+       {"title": "Orgulho e Preconceito", "genre": "Romance"}
+       // ... outros livros
+   ],
+   "recommended_books": [
+       {"title": "A Guerra dos Tronos", "genre": "Fantasia"},
+       {"title": "Orgulho e Preconceito", "genre": "Romance"},
+       {"title": "O Nome do Vento", "genre": "Fantasia"}
+       // ... 3 livros aleatórios da sua lista
+   ]
+}
+
+
+* Resposta se não houver livros (HTTP 404 Not Found):
+JSON
+{
+   "message": "No books found."
+}
+
+
+3. /recommend_books (GET)
+* Propósito: Obtém recomendações de livros com base em um título ou gênero fornecido como parâmetro na URL.
+* O que enviar (como parâmetros na URL):
+* title (opcional): Uma string para buscar livros que contenham essa palavra (case-insensitive) no título.
+* genre (opcional): Uma string para buscar livros que contenham essa palavra (case-insensitive) no gênero.
+* limit (opcional): Um número inteiro para limitar a quantidade de recomendações retornadas (o padrão é 20).
+
+
+* Exemplos de requisição:
+* Para buscar livros com "vento" no título: /recommend_books?title=vento
+* Para buscar livros de "fantasia": /recommend_books?genre=fantasia
+* Para buscar até 5 livros com "guerra" no título: /recommend_books?title=guerra&limit=5
+* Para buscar livros de "romance" limitando a 10 resultados: /recommend_books?genre=romance&limit=10
+
+
+* Resposta de sucesso (HTTP 200 OK):
+JSON
+{
+   "recommended_books": [
+       {"title": "O Nome do Vento", "genre": "Fantasia"},
+       {"title": "As Crônicas do Matador de Reis - O Temor do Sábio", "genre": "Fantasia"}
+       // ... livros que correspondem à busca
+   ]
+}
+
+
+* Resposta de erro (HTTP 400 Bad Request):
+JSON
+{
+   "error": "Please provide a title or genre for recommendations"
+}
+
+
+(Ocorre se nem title nem genre forem fornecidos.)
