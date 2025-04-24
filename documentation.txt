@@ -1,104 +1,152 @@
-﻿DOCUMENTAÇÃO API PERSONAL LIBRARY
+﻿📚 Documentação da API – Personal Library
+Desenvolvedores: Adrian Kauã Xavier e Ana Carolina Pereira Martins
 
+🔧 Visão Geral
+A API "Personal Library" permite o gerenciamento completo de uma biblioteca pessoal. É possível cadastrar livros com múltiplos autores e gêneros, registrar usuários, fazer avaliações, e obter recomendações via API do Google Books.
 
-Adrian Kauã Xaviere Ana Carolina Pereira Martins
+A base de dados contém as seguintes entidades:
 
+User (Usuário)
 
+Book (Livro)
 
+Author (Autor)
 
+Genre (Gênero)
 
+BookAuthor (Relação muitos para muitos entre livros e autores)
 
-Com base no seu código Flask, os seguintes endpoints estão disponíveis:
+Review (Avaliações)
 
+📌 Endpoints Disponíveis
+1. POST /users
+Cria um novo usuário.
 
-1. /add_book (POST)
-* Propósito: Adiciona um novo livro à sua biblioteca pessoal.
-* O que enviar no corpo da requisição (em JSON):
-JSON
+Corpo da requisição (JSON):
+
+json
+Copiar
+Editar
 {
-   "title": "O Nome do Vento",
-   "genre": "Fantasia"
+  "name": "João Silva"
 }
-* title: O título do livro (string, obrigatório).
-* genre: O gênero do livro (string, obrigatório).
+Resposta (201 Created):
 
-
-* Resposta de sucesso (HTTP 201 Created):
-JSON
+json
+Copiar
+Editar
 {
-   "message": "Book added successfully"
+  "message": "User created"
 }
+2. POST /books
+Adiciona um novo livro com autores e gênero.
 
+Corpo da requisição (JSON):
 
-* Resposta de erro (HTTP 400 Bad Request):
-JSON
+json
+Copiar
+Editar
 {
-   "error": "Title and genre are required"
+  "title": "O Nome do Vento",
+  "genre": "Fantasia",
+  "authors": ["Patrick Rothfuss"]
 }
+Resposta (201 Created):
 
-
-(Ocorre se title ou genre não forem fornecidos.)
-
-
-2. /my_books (GET)
-* Propósito: Lista todos os livros da sua biblioteca e fornece 3 indicações aleatórias (ou menos, se houver menos de 3 livros).
-* O que enviar: Nada no corpo da requisição. É uma requisição GET simples.
-* Resposta de sucesso (HTTP 200 OK):
-JSON
+json
+Copiar
+Editar
 {
-   "my_books": [
-       {"title": "O Nome do Vento", "genre": "Fantasia"},
-       {"title": "A Guerra dos Tronos", "genre": "Fantasia"},
-       {"title": "Orgulho e Preconceito", "genre": "Romance"}
-       // ... outros livros
-   ],
-   "recommended_books": [
-       {"title": "A Guerra dos Tronos", "genre": "Fantasia"},
-       {"title": "Orgulho e Preconceito", "genre": "Romance"},
-       {"title": "O Nome do Vento", "genre": "Fantasia"}
-       // ... 3 livros aleatórios da sua lista
-   ]
+  "message": "Book added"
 }
+3. GET /books
+Lista todos os livros cadastrados.
 
+Resposta (200 OK):
 
-* Resposta se não houver livros (HTTP 404 Not Found):
-JSON
+json
+Copiar
+Editar
+[
+  {
+    "title": "O Nome do Vento",
+    "genre": "Fantasia",
+    "authors": ["Patrick Rothfuss"]
+  },
+  ...
+]
+4. POST /reviews
+Adiciona uma avaliação a um livro.
+
+Corpo da requisição (JSON):
+
+json
+Copiar
+Editar
 {
-   "message": "No books found."
+  "rating": 5,
+  "comment": "Excelente leitura!",
+  "user_id": 1,
+  "book_id": 2
 }
+Resposta (201 Created):
 
-
-3. /recommend_books (GET)
-* Propósito: Obtém recomendações de livros com base em um título ou gênero fornecido como parâmetro na URL.
-* O que enviar (como parâmetros na URL):
-* title (opcional): Uma string para buscar livros que contenham essa palavra (case-insensitive) no título.
-* genre (opcional): Uma string para buscar livros que contenham essa palavra (case-insensitive) no gênero.
-* limit (opcional): Um número inteiro para limitar a quantidade de recomendações retornadas (o padrão é 20).
-
-
-* Exemplos de requisição:
-* Para buscar livros com "vento" no título: /recommend_books?title=vento
-* Para buscar livros de "fantasia": /recommend_books?genre=fantasia
-* Para buscar até 5 livros com "guerra" no título: /recommend_books?title=guerra&limit=5
-* Para buscar livros de "romance" limitando a 10 resultados: /recommend_books?genre=romance&limit=10
-
-
-* Resposta de sucesso (HTTP 200 OK):
-JSON
+json
+Copiar
+Editar
 {
-   "recommended_books": [
-       {"title": "O Nome do Vento", "genre": "Fantasia"},
-       {"title": "As Crônicas do Matador de Reis - O Temor do Sábio", "genre": "Fantasia"}
-       // ... livros que correspondem à busca
-   ]
+  "message": "Review added"
 }
+5. GET /recommend_books
+Recomenda livros da API do Google Books com base em título e/ou gênero.
 
+Parâmetros da URL:
 
-* Resposta de erro (HTTP 400 Bad Request):
-JSON
+title (opcional): palavra-chave no título
+
+genre (opcional): gênero do livro
+
+limit (opcional): quantidade máxima de resultados (padrão: 10)
+
+Exemplos:
+
+/recommend_books?title=vento
+
+/recommend_books?genre=fantasia&limit=5
+
+Resposta (200 OK):
+
+json
+Copiar
+Editar
 {
-   "error": "Please provide a title or genre for recommendations"
+  "items": [
+    {
+      "nome": "O Nome do Vento",
+      "descricao": "Descrição do livro...",
+      "link": "https://...",
+      "autores": ["Patrick Rothfuss"]
+    },
+    ...
+  ]
 }
+Erro (400 Bad Request):
 
+json
+Copiar
+Editar
+{
+  "error": "Please provide a title or genre for recommendations"
+}
+🧠 Recursos Adicionais Sugeridos
+(Estes ainda podem ser implementados, se desejado)
 
-(Ocorre se nem title nem genre forem fornecidos.)
+🔍 Buscar livros por autor, título ou gênero (GET /books/search)
+
+✏ Atualizar livros (PUT /books/<id>)
+
+🗑 Remover livros (DELETE /books/<id>)
+
+⭐ Ver todas as avaliações de um livro
+
+📊 Retornar média de avaliação por livro

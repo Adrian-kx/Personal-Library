@@ -1,0 +1,365 @@
+{
+  "info": {
+    "name": "Personal Library API - Complete CRUD",
+    "_postman_id": "d1234567-89ab-4cde-f012-3456789abcde",
+    "description": "Coleção completa com todos os endpoints CRUD para a API Personal Library",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Criar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ana Martins\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Listar Usuários",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ana Carolina Martins\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Usuário",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:5000/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["users", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Adicionar Livro",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"O Nome do Vento\",\n  \"genre\": \"Fantasia\",\n  \"authors\": [\"Patrick Rothfuss\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["books"]
+            }
+          }
+        },
+        {
+          "name": "Listar Livros",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/books",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["books"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Livro",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"O Nome do Vento - Edição Especial\",\n  \"genre\": \"Fantasia Épica\",\n  \"authors\": [\"Patrick Rothfuss\", \"Co-Autor\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/books/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["books", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Livro",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:5000/books/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["books", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authors",
+      "item": [
+        {
+          "name": "Criar Autor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Patrick Rothfuss\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/authors",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["authors"]
+            }
+          }
+        },
+        {
+          "name": "Listar Autores",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/authors",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["authors"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Autor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Patrick James Rothfuss\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/authors/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["authors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Autor",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:5000/authors/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["authors", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Adicionar Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 5,\n  \"comment\": \"Fantástico!\",\n  \"user_id\": 1,\n  \"book_id\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/reviews",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["reviews"]
+            }
+          }
+        },
+        {
+          "name": "Listar Reviews",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/reviews",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["reviews"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Review",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 4,\n  \"comment\": \"Muito bom, mas não perfeito\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/reviews/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["reviews", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Review",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:5000/reviews/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["reviews", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recommendations",
+      "item": [
+        {
+          "name": "Recomendar Livros - Título",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/recommend_books?title=vento",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["recommend_books"],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "vento"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Recomendar Livros - Gênero",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/recommend_books?genre=fantasia&limit=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["recommend_books"],
+              "query": [
+                {
+                  "key": "genre",
+                  "value": "fantasia"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
